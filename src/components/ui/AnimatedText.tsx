@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 
 interface AnimatedTextProps {
-  text: string;
+  text: React.ReactNode;
   className?: string;
   delay?: number;
   once?: boolean;
