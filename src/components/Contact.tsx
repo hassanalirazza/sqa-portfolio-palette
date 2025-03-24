@@ -3,6 +3,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
+import emailjs from "emailjs-com";
 import AnimatedSection from "./ui/AnimatedSection";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -22,6 +24,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -33,14 +36,41 @@ const Contact = () => {
     },
   });
 
-  const handleSubmit = (values: FormValues) => {
-    // This would typically integrate with a backend service
-    console.log("Form submitted:", values);
-    toast({
-      title: "Message Sent",
-      description: "Thank you for your message! I'll get back to you soon.",
-    });
-    form.reset();
+  const handleSubmit = async (values: FormValues) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Replace these with your EmailJS service ID, template ID, and user ID
+      const serviceId = "YOUR_SERVICE_ID"; // You'll need to replace this
+      const templateId = "YOUR_TEMPLATE_ID"; // You'll need to replace this
+      const userId = "YOUR_USER_ID"; // You'll need to replace this
+      
+      // Create a template params object that matches your EmailJS template
+      const templateParams = {
+        from_name: values.name,
+        from_email: values.email,
+        subject: values.subject,
+        message: values.message,
+      };
+      
+      await emailjs.send(serviceId, templateId, templateParams, userId);
+      
+      toast({
+        title: "Message Sent",
+        description: "Thank you for your message! I'll get back to you soon.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Failed to Send",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -141,8 +171,9 @@ const Contact = () => {
                 <Button
                   type="submit"
                   className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg transition-all hover:bg-primary/90"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Form>
