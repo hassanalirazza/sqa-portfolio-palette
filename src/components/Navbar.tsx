@@ -99,7 +99,7 @@ const Navbar = () => {
         className={cn(
           "fixed inset-0 z-40 bg-background/95 backdrop-blur-md flex-col items-center pt-24 px-8",
           "md:hidden transition-all duration-300 ease-in-out",
-          mobileMenuOpen ? "flex translate-y-0" : "translate-y-full hidden"
+          mobileMenuOpen ? "flex translate-y-0 bg-background" : "translate-y-full hidden"
         )}
       >
         <nav className="w-full flex flex-col space-y-6 items-center">
