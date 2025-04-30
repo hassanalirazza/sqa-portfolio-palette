@@ -16,7 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  ContactNo: z.string().email({ message: "Please enter a valid contact number" }),
+  ContactNo: z.string().regex(/^\+?[0-9]{10,15}$/, {message: "Please enter a valid contact number",}),
   subject: z.string().min(5, { message: "Subject must be at least 5 characters" }),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
 });
@@ -213,7 +213,7 @@ const Contact = () => {
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
                     <a href="mailto:contact@example.com" className="text-foreground hover:text-primary transition-colors">
-                      contact@example.com
+                      hassaneliraza@gmail.com
                     </a>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ const Contact = () => {
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Phone</p>
                     <a href="tel:+15551234567" className="text-foreground hover:text-primary transition-colors">
-                      +1 (555) 123-4567
+                      +92 334 9575154
                     </a>
                   </div>
                 </div>
@@ -237,7 +237,7 @@ const Contact = () => {
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Location</p>
                     <p className="text-foreground">
-                      San Francisco, California
+                      Rawalpindi, Pakistan
                     </p>
                   </div>
                 </div>

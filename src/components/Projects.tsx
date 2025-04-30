@@ -4,13 +4,13 @@ import AnimatedSection from "./ui/AnimatedSection";
 
 const projects = [
   {
-    title: "E-Commerce Test Automation Framework",
+    title: "Service Lovers",
     description: "Developed a comprehensive Selenium-based framework for automating regression testing of a high-traffic e-commerce platform, reducing testing time by 65%.",
     tags: ["Selenium", "Java", "TestNG", "Jenkins", "Docker"],
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1470&auto=format&fit=crop",
     links: {
       github: "#",
-      live: "#",
+      live: "https://servicelovers.com/",
     },
   },
   {
@@ -70,7 +70,7 @@ const ProjectCard = ({
             {project.title}
           </h3>
           <p className="text-muted-foreground mb-4">
-            {project.description}
+            {project.ƒ}
           </p>
           
           <div className="flex flex-wrap gap-2 mb-6">
